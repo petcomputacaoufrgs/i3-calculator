@@ -1,0 +1,60 @@
+
+#menu, #top, #sub_topo, #identificacao, .bt_impressao, #infoDev { display:none}
+
+
+.exibirTela{display:none;}
+
+
+#cabecalho {
+    height: 75px;
+    /* background-image:url(img/logo_ufrgs_new.png); */
+    /* background-repeat:no-repeat; background-position:left; */
+    margin: 0 10px 0 10px;
+    text-align: center;
+    
+}
+
+#cabecalho_logo 
+{ 
+    position: absolute;
+    top: 0px;
+    left: 5px;
+}
+
+#cabecalho_ufrgs, #cabecalho_portal {
+    font-size: 15px;
+  	font-weight: bold;
+}
+
+#titulo-pagina{
+
+    padding: 0 5px;
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+    
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin-top: 10px;
+	font-size: 11px;
+	}
+
+.identificac_usuario
+{
+	margin:10px 10px 30px 0px;
+}
+/*conteúdo*/
+
+#conteudo 
+{
+    margin:30px 10px 10px 10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    /* margin: 0px; */
+    /* padding:0px; */
+    font-size: 11px;    
+
+}
+
+#link_sos {
+	top: -50px;
+	display: none !important;
+}

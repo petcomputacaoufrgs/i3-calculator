@@ -1,0 +1,275 @@
+/* CSS Document */
+
+/* Labels */
+
+.label-1, label.esquerdaFlutuante, label.esquerdaAlinhado {
+	width: 230px;
+	display: inline-block;
+	/*float: left;
+    clear: left;*/
+	text-align: right;
+	margin-right: 5px;
+}
+
+label.esquerdaAlinhado {
+    padding-top: 3px;
+    width: 100px;
+    color: #25365A;
+}
+
+label.esquerdaAlinhado.maior {
+    width: 150px;
+}
+
+label.esquerdaAlinhado.bemGrande {
+    width: 200px;
+}
+
+label.esquerdaAlinhado.paraTexto {
+	padding-top: 0 !important;
+}
+
+label.direita {
+    margin: 0;
+    padding: 3px 10px 0 0;
+    color: #25365A;
+}
+
+label.obrigatorio::before {
+    content: '* ';
+    color: #c00;
+}
+
+.dadoRotulado {
+    display: inline-block;
+    padding: 3px 0;
+}
+
+input, textarea, select {
+    margin: 2px 0;
+    padding: 3px;
+	border: 1px solid #ababab;
+}
+
+input.semRotuloEsquerda, select.semRotuloEsquerda, textarea.semRotuloEsquerda, button.semRotuloEsquerda {
+    margin-left: 105px;
+}
+
+input.semRotuloEsquerda.maior, select.semRotuloEsquerda.maior, textarea.semRotuloEsquerda.maior, button.semRotuloEsquerda.maior {
+    margin-left: 155px;
+}
+
+input.semRotuloEsquerda.bemGrande, select.semRotuloEsquerda.bemGrande, textarea.semRotuloEsquerda.bemGrande, button.semRotuloEsquerda.bemGrande {
+    margin-left: 205px;
+}
+
+textarea {
+    line-height: 1.5em;
+}
+
+span.ajuda {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    padding-left: 22px; 
+    background: url("visual_ufrgs/ajuda.gif") no-repeat left center;
+    cursor: pointer;
+}
+
+.label-2{
+	margin-left: 20px;
+	}
+	
+.label-3{
+	margin-right: 10px;
+	}
+	
+.label-4{
+	margin-left: 8px;
+	}
+	
+.label-5{
+	margin-right: 10px;
+	float: left;
+	}
+
+/* Inputs / Selects */
+
+.text-select-1 {
+	width: auto;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.text-select-2 {
+	width: 30px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.text-select-3 {
+	width: 90px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.text-select-4 {
+	width: 240px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.text-1 {
+	width: 500px;
+	height: 600px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.select-multiple {
+	width: 200px;
+	height: 250px;
+	margin-bottom: 20px;
+	}
+
+/* Inputs / Selects - Datas */
+	
+.date-1 {
+	width: 60px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.date-2 {
+	width: 80px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+	
+.date-3 {
+	width: 120px;
+	margin-left: 8px;
+	margin-right: 8px;
+	}
+
+
+/* Bullets / Checkboxes / Listas */
+	
+ul#bullet-hidden-nalinha {
+	margin: 0;
+	padding: 0;
+	}
+	
+#bullet-hidden-nalinha li{
+	display: inline;
+	padding-right: 10px;
+	list-style-position: inside;
+	}
+	
+#bullet-hidden li{
+	list-style-type:none;
+	margin-left: -45px;
+	}
+	
+	
+/* Botao */
+	
+button, .button, .button-1, input[type=button], input[type=submit], .buttonSemImagem, button.btSemImagem, .button.btSemImagem, input[type=button].btSemImagem, input[type=submit].btSemImagem, a.button, a.button-1 {
+	color: #FFF;
+	font-weight: bold;
+    font-size: 11px;
+	background-color: #2475c6;
+	/*background: url(visual_ufrgs/fundo_bt.gif) repeat-x;*/
+	margin: 5px;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+    padding: 4px 8px;
+	text-decoration: none;
+}
+
+button:hover, .button:hover, .button-1:hover, a.button:hover, a.button-1:hover {
+    background:#1F63A7;
+}
+
+button.CLocaliza, .button.CLocaliza {
+    padding-bottom: 2px;
+    margin: 0;
+}
+
+button.desabilitado, .button.desabilitado, .botaoDesabilitado, button:disabled, .button:disabled,
+.buttonSemImagem.desabilitado, button.btSemImagem.desabilitado, .button.btSemImagem.desabilitado, input[type=button].btSemImagem.desabilitado, input[type=submit].btSemImagem.desabilitado, 
+.buttonSemImagem:disabled, button.btSemImagem:disabled, .button.btSemImagem:disabled, input[type=button].btSemImagem:disabled, input[type=submit].btSemImagem:disabled,
+button.desabilitado:hover, .button.desabilitado:hover, .botaoDesabilitado:hover, button:disabled:hover, .button:disabled:hover,
+.buttonSemImagem.desabilitado:hover, button.btSemImagem.desabilitado:hover, .button.btSemImagem.desabilitado:hover, input[type=button].btSemImagem.desabilitado:hover, input[type=submit].btSemImagem.desabilitado:hover, 
+.buttonSemImagem:disabled:hover, button.btSemImagem:disabled:hover, .button.btSemImagem:disabled:hover, input[type=button].btSemImagem:disabled:hover, input[type=submit].btSemImagem:disabled:hover {
+	background-color: #ccc;
+	cursor: default;
+}
+
+button.btPerigo, .button.btPerigo, .btPerigo, input[type=button].btPerigo, input[type=submit].btPerigo, button.btPerigoSemImagem, .button.btPerigoSemImagem, .btPerigoSemImagem, button.btPerigo.btSemImagem, .button.btPerigo.btSemImagem, .btPerigo.btSemImagem {
+	background-color: #A0252C;
+}
+
+button.btPerigo:hover, .button.btPerigo:hover, input[type=button].btPerigo:hover, input[type=submit].btPerigo:hover, button.btPerigoSemImagem:hover, .button.btPerigoSemImagem:hover, .btPerigoSemImagem:hover, button.btPerigo.btSemImagem:hover, .button.btPerigo.btSemImagem:hover, .btPerigo.btSemImagem:hover {
+    background-color: #BD2C34;
+}
+
+button.btSucesso, .button.btSucesso, .btSucesso, input[type=button].btSucesso, input[type=submit].btSucesso, button.btSucessoSemImagem, .button.btSucessoSemImagem, .btSucessoSemImagem, button.btSucesso.btSemImagem, .button.btSucesso.btSemImagem, .btSucesso.btSemImagem  {
+	background-color: #37944a;
+}
+
+button.btSucesso:hover, .button.btSucesso:hover, input[type=button].btSucesso:hover, input[type=submit].btSucesso:hover, button.btSucessoSemImagem:hover, .button.btSucessoSemImagem:hover, .btSucessoSemImagem:hover, button.btSucesso.btSemImagem:hover, .button.btSucesso.btSemImagem:hover, .btSucesso.btSemImagem:hover {
+    background-color: #3fa037;
+}
+
+button.btAlerta, .button.btAlerta, .btAlerta, input[type=button].btAlerta, input[type=submit].btAlerta, button.btAlertaSemImagem, .button.btAlertaSemImagem, .btAlertaSemImagem, button.btAlerta.btSemImagem, .button.btAlerta.btSemImagem, .btAlerta.btSemImagem{
+	background-color: #f5ca00;
+	color: #000;
+}
+
+button.btAlerta:hover, .button.btAlerta:hover, input[type=button].btAlerta:hover, input[type=submit].btAlerta:hover, button.btAlertaSemImagem:hover, .button.btAlertaSemImagem:hover, .btAlertaSemImagem:hover, button.btAlerta.btSemImagem:hover, .button.btAlerta.btSemImagem:hover, .btAlerta.btSemImagem:hover {
+    background-color: #ffd200;
+}
+
+.button#pos-campo, .button-1#pos-campo {
+	margin-left: 10px;
+	}
+
+	
+/* alinhamentos especificos */
+	
+#alinhamento1{
+	float: left;
+	padding-left: 30px;
+	}
+	
+#alinhamento2{
+	float: left;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 50px;
+	}
+
+#alinhamento3{
+	padding-left: 30px;
+	padding-top: 20px;
+	}
+	
+#alinhamento4{
+	margin-left: 40px;
+	}
+	
+	
+button.btAnalise, .button.btAnalise, .btAnalise, input[type=button].btAnalise, input[type=submit].btAnalise, button.btAnaliseSemImagem, .button.btAnaliseSemImagem, .btAnaliseSemImagem, button.btAnalise.btSemImagem, .button.btAnalise.btSemImagem, .btAnalise.btSemImagem{
+    border: 1px solid #2475c6;
+    background: white;
+    color: #2475c6;
+}
+
+button.btAnalise:hover, .button.btAnalise:hover, input[type=button].btAnalise:hover, input[type=submit].btAnalise:hover, button.btAnaliseSemImagem:hover, .button.btAnaliseSemImagem:hover, .btAnaliseSemImagem:hover, button.btAnalise.btSemImagem:hover, .button.btAnalise.btSemImagem:hover, .btAnalise.btSemImagem:hover {
+    background: #2475c6;
+    color: white;
+}
+	
+

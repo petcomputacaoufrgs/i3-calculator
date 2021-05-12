@@ -1,0 +1,295 @@
+/* CSS Document */
+
+* {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    margin: 0px;
+	padding: 0px;
+    font-size: 1em;
+    font-size: 12px;
+}
+
+/* Correções do jQuery UI*/
+.ui-datepicker * {
+    font-size: 0.95em;
+}
+
+.ui-tabs .ui-state-active, .ui-tabs .ui-widget-content .ui-state-active, .ui-tabs .ui-widget-header .ui-state-active {
+	background: none !important;
+	background-color: #f9fafb !important;
+}
+.ui-tabs .ui-state-active a, .ui-tabs .ui-widget-content .ui-state-active a, .ui-tabs .ui-widget-header .ui-state-active a, .ui-accordion-content a {
+	color: #2779aa !important;
+}
+
+.ui-autocomplete-input {
+	background: url('/Design/visual_ufrgs/icone_zoom_in.png') no-repeat right center #fff;
+	background-size: 20px 20px;
+}
+.ui-autocomplete-loading
+{
+    background: url('/Design/visual_ufrgs/smallLoader.gif') no-repeat right center !important;
+}
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	}
+
+h1, #titulo-pagina {
+    font-size: 14px;
+    color: #005B95;
+    padding: 10px 10px;
+}
+
+#titulo-pagina {
+    padding-left: 10px !important;
+}
+
+h2 {
+    font-size: 14px;
+    padding: 5px 10px;
+    color: #666;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+.moldura h1, .moldura h2, .moldura h3, fieldset h1, fieldset h2, fieldset h3 {
+    padding-left: 0px;
+}
+
+a {
+    color: #0066CC;
+    text-decoration:  underline;
+}
+a:hover {
+    color: #006391;
+    text-decoration: none;
+}
+
+#cab{
+	margin: 10px;
+    height: 90px;
+	}
+
+#campos_cab{
+	width: 600px;
+	float: left;
+	}
+
+#logo{
+	float: left;
+	width: 115px;
+	height: 89px;
+	padding-right: 30px;
+	margin-bottom: 20px;
+	}
+	
+.moldura{
+	background-color: #F7F7F7;
+	border: 1px solid #CCCCCC;
+	border-radius: 7px;
+	margin: 5px 10px;
+	padding: 10px;
+}
+
+fieldset {
+    background-color: #F7F7F7;
+	border: 1px solid #CCCCCC;
+	border-radius: 7px;
+	padding: 10px;
+}
+
+fieldset legend {
+    font-weight: bold;
+	color: #006699;
+	padding: 0 10px;
+}
+
+.moldura .moldura, .moldura fieldset, fieldset fieldset,
+.moldura .moldura .moldura .moldura, .moldura fieldset fieldset fieldset, fieldset fieldset fieldset fieldset,
+.moldura .moldura .moldura .moldura .moldura .moldura, .moldura fieldset fieldset fieldset fieldset fieldset, fieldset fieldset fieldset fieldset fieldset fieldset,
+.moldura fieldset fieldset fieldset fieldset fieldset fieldset fieldset, fieldset fieldset fieldset fieldset fieldset fieldset fieldset fieldset
+{
+    background-color: #fff;
+}
+
+fieldset fieldset fieldset, .moldura fieldset fieldset, .moldura .moldura .moldura, .moldura fieldset .moldura,
+.moldura fieldset fieldset fieldset fieldset, fieldset fieldset fieldset fieldset fieldset, .moldura .moldura .moldura .moldura .moldura, 
+.moldura fieldset fieldset fieldset fieldset fieldset fieldset, fieldset fieldset fieldset fieldset fieldset fieldset fieldset
+{
+    background-color: #F7F7F7;
+}
+
+.fieldset-2 {
+    background-color: #fff !important;
+    border-radius: 0 !important;
+}
+
+.blocoTexto {
+    padding: 10px;
+    font-size: 11px;
+}
+	
+.botoes{
+    /*width: 90%;*/
+    margin-top: 30px;
+    text-align: right;
+}
+
+.coluna50 {
+    position: relative;
+    float: left;
+    display: block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    width: calc(50% - 10px);
+}
+
+.coluna50.moldura {
+    width: calc(50% - 20px);
+}
+
+.coluna30 {
+    position: relative;
+    float: left;
+    display: block;
+	padding: 5px 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
+    width: calc(33% - 10px);
+}
+
+.coluna30.moldura {
+    width: calc(33% - 20px);
+}
+
+.limpar {
+    clear: both;
+}
+
+.botaoImpressaoTopo {
+    position: absolute;
+    right: 50px;
+    top: 145px;
+}
+
+.clicavel {
+    cursor: pointer;
+}
+
+.escondido {
+    display: none;
+}
+
+#link_sos {
+    background: url("/design/visual_ufrgs/botao_SOS_aluno.png") no-repeat left top transparent;
+    font-size: 0;
+    color: #40718C;
+    display: block;
+    float: left;
+    height: 43px;
+    width: 135px;
+    right: 300px;
+    position: absolute;
+    text-decoration: none;
+    top: 20px;
+}
+#link_sos:hover {
+    background: url("/design/visual_ufrgs/botao_SOS_aluno.png") no-repeat left bottom transparent;
+}
+
+#link_sav {
+    background: url("/design/visual_ufrgs/botao_sala_aula_virtual.png") no-repeat left top transparent;
+    font-size: 0;
+    color: #40718C;
+    display: block;
+    height: 43px;
+    width: 135px;
+    text-decoration: none;
+}
+#link_sav:hover {
+    background: url("/design/visual_ufrgs/botao_sala_aula_virtual.png") no-repeat left bottom transparent;
+}
+
+#banners_avaliacao_portal {
+	position: absolute;
+	top: 200px;
+	right: 10px;
+}
+
+#banners_avaliacao_portal a {
+	font-size: 0;
+    color: #fff;
+    display: block;
+    float: left;
+    height: 68px;
+    width: 135px;
+    text-decoration: none;
+	border: 1px solid #ddd;
+	padding: 5px;
+	margin: 1px 5px;
+}
+
+#banners_avaliacao_portal .a_questionario {
+	background: url("/design/banners/questionario_avaliacao.png") no-repeat center center #fff;
+}
+
+#banners_avaliacao_portal .a_questionario:hover, #banners_avaliacao_portal .a_portalideias:hover {
+	border-color: #bbb;
+}
+
+#banners_avaliacao_portal .a_portalideias {
+	background: url("/design/banners/opiniao_portal.png") no-repeat center center #fff;
+}
+
+#bannerDivCPD {
+	position: absolute;
+	display: block;
+	top: 150px;
+	right: 10px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: url("/design/banners/teaser.jpg") no-repeat top right;
+	transition-duration: 0.5s;
+    text-align: center;
+    line-height: 60px;
+    cursor: pointer;
+}
+#bannerDivCPD::before {
+    content: "?";
+    color: #fff;
+    font-size: 40px;
+}
+#bannerDivCPD:hover {
+	width: 600px;
+    height: 450px;
+    border-radius: 0px;
+}
+#bannerDivCPD:hover::before {
+    content: "";
+}
+
+html, body {
+    height: 100%;
+}
+#geral {
+    min-height: calc(100% - 152px);
+}
+#logo-cpd-alpha {
+    float: left;
+    height: 40px;
+    margin: -45px 5px 0;
+    opacity: 0.4;
+}
+
+@media print {    
+    .escondeNaImpressao, .escondeNaImpressao * {
+        display: none !important;
+    }
+}

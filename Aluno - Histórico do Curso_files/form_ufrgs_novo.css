@@ -1,0 +1,444 @@
+/* CSS Document */
+
+
+/**
+* Temporário - faz parte do layout dos serviços
+*/
+.bt_impressao {
+    position: absolute; right: 50px; top: 145px;
+}
+/*
+.button{
+
+	height: 20px;
+	background:url(./img/fundo_bt.gif) repeat-x;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin: 5px;
+	padding:1px 4px 5px 4px;
+	font-size: 11px;
+	color:#fff;
+	font-weight:bold;
+	border: solid 1px #1F63A7;
+	}
+*/
+/** Fim da parte temporária */
+
+#cabecalho_ufrgs, #cabecalho_portal, #cabecalho_logo {
+    display: none;
+}
+
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.identificac_usuario{ display:none}
+
+.exibirImpressao{display:none;}
+
+/* TODO DA PÁGINA */
+#top{
+    display:block; background-image:url(img/fundo_topo.jpg); 
+    background:#F2F9FF url(img/fundo_topo.jpg)
+        repeat-x bottom;
+    width: 100%;
+    height: 92px; max-height:92px; min-width:760px;
+}
+
+.UFRGS { 
+    display:block; margin:0px; 
+    height:55px;width:150px;
+    margin: 0px 0 0 15px; 
+    background-image:url(img/logo_ufrgs.gif); 
+    background-repeat:no-repeat; background-position:left; 
+    tex\t-indent:2000px;
+    _padding-left:100px; _color:#F2F9FF ;
+    overflow:hidden; 
+}
+
+#top div{margin:0px; padding:0px;
+
+}
+
+
+#geral{
+    width:auto; height: auto; 
+    margin: 15px 5px 10px 5px;  min-width:760px;
+}
+
+
+
+/** Ientificação */
+#identificacao{
+
+    position:relative; top:-60px;right:10px; height:20px; text-align:right; display:block; min-width:700px;
+    margin-left:auto; overflow:visible; _position:absolute; _top:28px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+
+#identificacao a, #identificacao span{
+    float: right;
+    text-decoration:none;color:#000000;	
+    font-weight: bold;   
+}
+#identificacao a:hover{text-decoration:underline;}
+
+#identificacao span.nomePessoa {
+    display: block;
+    width: 250px;
+    margin-right: 5px;
+}
+
+
+
+/*abas*/
+
+
+#abas {
+  float:left;
+  width:100%;
+  background:#DAE0D2 url(img/fundo_topo.jpg) repeat-x bottom;
+  font-size:93%;
+  line-height:normal;
+  }
+#abas ul {
+  margin:0;
+  padding:10px 10px 0;
+  list-style:none;
+  }
+#abas li {
+  height: 26px;
+  width: 100px;
+  text-align: center;
+  float:left;
+  margin:0 5px 0 0;
+  padding:0 0 0 0px;
+  border-top: 1px solid #5C9EE1;
+  border-left: 1px solid #5C9EE1;
+  border-right: 1px solid #5C9EE1;
+  }
+#abas a {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  float:left;
+  display:block;
+  padding:4px 6px 4px 6px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#0066CC;
+  }
+/* Commented Backslash Hack
+   hides rule from IE5-Mac \*/
+#abas a {float:none;}
+/* End IE5-Mac hack */
+#abas a:hover {
+  color:#000;
+  }
+#abas #current {
+  background:#FFFFFF;
+  }
+#abas #current a {
+  background:#FFFFFF;
+  color:#000;
+  padding-bottom:5px;
+  }
+
+#abas .selecao {
+  background:#FFFFFF;
+  }
+#abas .selecao a {
+  background:#FFFFFF;
+  color:#000;
+  padding-bottom:5px;
+  }
+
+  
+/*sub_top*/
+
+#sub_topo{
+background-color:#FFFFFF;
+width:100%;
+height:25px;
+padding-top:10px;
+
+
+
+}
+
+
+#sub_topo div {
+float:left;
+width:48%;
+background-color:#FFFFFF;
+height:25px;
+padding-left:15px;
+
+}
+
+#sub_topo span{
+font-weight:bold;
+}
+
+#sub_topo #d_localiza{  
+ background-color:#FFFFFF;
+ text-align:right; overflow:hidden;
+}
+
+#i_button{ display:inline-block;
+ background-image:url(img/seta.jpg); 
+ width:22px; 
+ height:21px; 
+  border:none; text-indent:1000px; overflow:hidden; vertical-align: middle;
+}
+
+
+
+#sub_topo{
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 11px;
+background-color:#FFFFFF;
+width:100%;
+height:25px;
+padding-top:10px;
+}
+
+
+#sub_topo div {
+float:left;
+width:48%;
+background-color:#FFFFFF;
+height:25px;
+padding-left:15px;
+margin-top: -20px;
+}
+
+#sub_topo span{
+font-weight:bold;
+}
+
+#sub_topo #d_localiza{
+ background-color:#FFFFFF;
+ text-align:right; overflow:hidden;
+}
+
+#i_button{ display:inline-block;
+ background-image:url(img/seta.jpg);
+ width:22px;
+ height:21px;
+  border:none; text-indent:1000px; overflow:hidden; vertical-align: middle;
+}
+
+/*Menu  */
+
+#menu .grupo{ font-size:11px}
+
+#menu .grupo_menu{
+
+background-image:url(img/gradiente_fundo_novo_teste.jpg); background-repeat:repeat-x;  border: 1px solid #CCE4FF ;
+ margin-right:7px; margin-bottom:5px;
+}
+
+#menu .grupo_expandido .grupo{ display:block; padding-right:20px; background-image:url(img/contrair_teste.gif); background-position:top right; background-repeat:no-repeat; height:25px; min-height:17px;}
+
+
+#menu .grupo_contraido .grupo{
+ display:block;
+ padding-right:20px;
+ background-image:url(img/expandir.gif);
+ background-position:top right;
+ background-repeat:no-repeat;
+ min-height:17px;
+
+ }
+#menu .grupo_contraido ul{ display:none;}
+#menu .grupo_expandido ul{ display:block}
+
+#menu .menu li{ padding-left:20px;}
+
+#menu .menu li a { 
+    font-size: 11px !important;
+}
+
+#menu .grupo_menu_selecionado{
+
+  border-top: 1px solid #A5A5A5;
+  border-left: 1px solid #A5A5A5;
+  border-bottom: 1px solid #E6E6E6;
+  border-right: 0px solid #FFFFFF ;
+  background-color:#FFFFFF;  width: 163px;
+
+margin-bottom:5px;
+}
+
+#menu .grupo_menu_selecionado div{
+  border-top: 1px solid #BDBDBD;
+  border-left: 1px solid #BDBDBD; background-color:#FFFFFF;width: 163px; _width: 164px; _w\idth: 163px;
+
+ }
+
+
+#menu .menu_titulo{ margin-top:5px;
+}
+
+#menu .menu_titulo_expandido{ margin-top:5px; margin:0px; padding:5px;
+
+
+}
+
+
+#menu a:focus{ outline:none;}
+
+
+
+
+
+#menu .menu{
+
+}
+
+.menu ul{ margin-right:7px;}
+
+#menu{
+    font-size:11px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+#menu a {text-decoration:none; color:#000000}
+
+#menu li a:hover {color:red; }
+
+
+#menu{
+	float: left;
+	width: 165px;
+	left:5px;
+
+	}
+.grupo_menu{
+	float: left;
+	width: 157px;
+
+}
+
+#menu ul{
+	padding: 0;
+	margin: 0;
+	}
+
+#menu ul li{
+	list-style: none;
+	padding-bottom: 5px; left:5px;
+	}
+
+
+#menu .grupo_menu_selecionado .destaque a
+{
+   color: red; 
+}
+
+
+
+
+
+#estrutura{
+	margin: 0px 0px 0px 163px;
+	/*margin-left: 163px;*/
+	border-right: 1px solid #E6E6E6;
+        border-bottom: 1px solid #E6E6E6;
+        border-top: 1px solid #A5A5A5;
+			background: url(img/frame_grande/linha_esq.gif) repeat-y left;
+
+
+	}
+
+#estrutura-nomenu{
+	margin: 0px 0px 0px 0px;
+	/*margin-left: 163px;*/
+	border-right: 1px solid #E6E6E6;
+        border-bottom: 1px solid #E6E6E6;
+        border-top: 1px solid #A5A5A5;
+			background: url(img/frame_grande/linha_esq.gif) repeat-y left;
+
+
+	}
+
+
+#titulo-pagina{
+	border-top: 1px solid #BDBDBD;
+	padding: 0 5px;
+	color: #005B95;
+	font-size: 14px;
+	font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+	}
+
+
+/*conteúdo*/
+#cont{
+	background: url(img/frame_grande/linha_esq.gif) repeat-y left;
+	}
+
+
+#conteudo {
+ padding: 10px 5px 10px 20px;
+ height:auto;
+
+}
+#conteudo p{
+ margin-top:10px;
+ text-indent:15px;
+}
+
+/*baixo estrutura*/
+
+#baixo-estrutura{
+	clear: both;
+	margin: 0;
+	padding:0;
+	}
+
+#canto-dir{
+	height: 5px;
+	}
+
+#d_erro ul, #d_erro div, #d_erro h3, #d_erro h2, hr { margin-top:15px;}
+
+#d_erro li{ list-style:none; text-indent:15px;}
+#d_erro{}
+
+
+
+
+
+
+
+
+/** CONTEUDO DO DOCUMENTO */
+
+#conteudo
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    /* margin: 0px; */
+    /* padding:0px; */
+    font-size: 11px;    
+  
+}
+
+
+#infoDev{
+	font-size: 10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+
+                      border: #CCCCCC 1px solid;
+                    
+                    min-height: 70px;
+                    width: 600px;
+                    position: absolute;
+                    top:5px;
+                    left: 180px;
+                    background:#FFFFFF;
+    
+}

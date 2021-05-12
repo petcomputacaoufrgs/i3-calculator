@@ -1,0 +1,65 @@
+a {text-decoration: none; color: #5C9EE1;}
+a:hover {color: #FF0000;}
+.coluna1 {
+	width: 60%;
+	/*position: absolute;*/
+	padding: 4px;
+	/*top: 90px;*/
+	left: 5px;
+	}
+.coluna2 {
+	width:100%;
+	/*position: absolute;*/
+	text-align: right;
+	padding: 0px;
+	/*top: 90px;*/
+	}
+.TipoMenu {
+	cursor: pointer;
+	padding-left: 3px;
+	letter-spacing: 1px;
+    color: #000044;
+	font-size: 3mm;
+	/*font-weight: bold;*/
+	width: 300px;
+	text-align: left;
+	z-index: 50;
+	}
+
+.Tipo1 {
+	padding: 2px;
+    color: #000000;
+	font-size: 2.5mm;
+	text-align: left;
+	z-index: 50;
+	}
+.Tipo2 {
+	cursor: pointer;
+	padding-left: 25px;
+	padding-bottom: 5px;
+	padding-top: 1px;
+    color: #000000;
+	font-size: 2.5mm;
+	display: none;
+	text-align: left;
+	z-index: 50;
+	}
+.Tipo3 {
+	cursor: pointer;
+	padding-top: 3px;
+	display: block;
+	text-align: left;
+	z-index: 50;
+	}
+.div2{
+	font-size: 3.5mm;
+	color: #5C9EE1;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	z-index: 50;
+	}
+.submenucontainer{
+	padding-top: 3px;
+	padding-bottom: 1px;
+	z-index: 50;
+	}
