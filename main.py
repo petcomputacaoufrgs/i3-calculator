@@ -1,9 +1,12 @@
 from bs4 import BeautifulSoup
 import os
 
+MEETING_MESSAGE = '\033[1;30;46m Bem-vinde a calculadora de I3 \033[m'
+CONCLUSION_MESSAGE = '\033[1;30;46m Obrigada por usar o programa! \033[m'
+
 
 def has_extension(raw_file_name: str) -> bool:
-    """Check if the file name given has an extension
+    """ Check if the file name given has an extension
     :param raw_file_name: file's name
     :return: boolean indicating if the file has the extension or not
     """
@@ -13,7 +16,7 @@ def has_extension(raw_file_name: str) -> bool:
 
 
 def add_extension(raw_file_name: str, file_extension: str) -> str:
-    """Give the file extension to the file
+    """ Give the file extension to the file
     :param raw_file_name: file's name
     :param file_extension: extension of the file
     :return: file with the '.csv' extension
@@ -21,8 +24,9 @@ def add_extension(raw_file_name: str, file_extension: str) -> str:
     return raw_file_name + file_extension
 
 
-def get_valid_file_name(message, extension, need_to_exist=True) -> str:
+def get_valid_file_name(message: str, extension: str, need_to_exist=True) -> str:
     """ Get a valid file name (file name that exists in the computer)
+    :param need_to_exist: boolean indicating if the files must exist or can be created
     :param message: question soliciting the specific file needed
     :param extension: extension of the file
     :return: valid file name
@@ -40,7 +44,26 @@ def get_valid_file_name(message, extension, need_to_exist=True) -> str:
     return input_file
 
 
-def calculate_grades(info_table):
+def continue_process(question: str) -> bool:
+    """ Verify if the process should contnue or not based on the user answer
+    :param question: string with the question made
+    :return: return the boolean indicating if the process continue or not
+    """
+    answer = input(question)
+    while answer != 'n' and answer != 'y':
+        answer = input('Resposta inválida. \nPor favor, tente novamente (y/n): ')
+
+    if answer == 'n':
+        return False
+    else:
+        return True
+
+
+def get_grades(info_table) -> (list[list[list[int]]], list[int]):
+    """ Get student grades based on the table with all information
+    :param info_table: html table with all data of the classes
+    :return: a list with all grades per semester and a list with all grades
+    """
     table_of_grades = []
     absolute_grades = [0, 0, 0, 0, 0]
     grades_dictionary = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'FF': 4}
@@ -72,18 +95,27 @@ def calculate_grades(info_table):
     return table_of_grades, absolute_grades
 
 
-def calculate_i3(absolute_grades):
+def calculate_i3(absolute_grades: list) -> float:
+    """ Calculate the I3 based on the formula
+    I3 = [10 * A_grades + 8 * B_grades + 6 * C_grades]/ total_grades
+    Total_grades count A, B, C, D and FF grades
+    :param absolute_grades: list with all grades count
+    :return: I3 value
+    """
     return (10 * absolute_grades[0] + 8 * absolute_grades[1] + 6 * absolute_grades[2]) / sum(absolute_grades)
 
 
-def save_info(student_info, destination_file):
+def save_student_i3(student_info, destination_file: str):
+    """ Save the I3 obtained in the file given
+    :param student_info: instance of Student with the necessary information
+    :param destination_file: file where the data will be stored
+    :return: void
+    """
     file = open(destination_file, "a")
-    file.write(f"""Candidato: {student_info.name}
-I3: {student_info.I3}
-I3 por semestre: 
-{student_info.grades_per_semester}
-
-""")
+    file.write(f'Candidato: {student_info.name}, I3: {student_info.I3}')
+    for semester in student_info.grades_per_semester:
+        file.write(f', I3 {semester[0]}: {semester[2]}')
+    file.write('\n')
     file.close()
 
 
@@ -93,9 +125,11 @@ class Student:
         soup = BeautifulSoup(html, 'html.parser')
 
         self.name = soup.find("div", class_="nomePessoa").string.strip()
+        print(self.name)
         info_table = soup.find("table", class_="modelo1").findAll('td')
+        html.close()
 
-        table_of_grades, absolute_grades = calculate_grades(info_table)
+        table_of_grades, absolute_grades = get_grades(info_table)
 
         self.grades_per_semester = table_of_grades
 
@@ -107,23 +141,26 @@ class Student:
 
 
 if __name__ == '__main__':
-    # Tem que ser o histórico do curso
+    print(MEETING_MESSAGE)
     over = False
-    input_file = get_valid_file_name(
+    info_file = get_valid_file_name(
         'Insira o nome do arquivo .html do histórico do curso do aluno (com ou sem extensão): ', '.html')
-    student = Student(input_file)
+    student = Student(info_file)
 
     save_file = get_valid_file_name(
         'Insira o nome do arquivo .txt onde os dados obtidos serão salvos (com ou sem extensão): ', '.txt', False)
 
     while not over:
-        save_info(student, save_file)
-        continue_process = input('Deseja continuar lendo arquivos? (y/n): ')
-        if continue_process == 'n':
+        save_student_i3(student, save_file)
+
+        if not continue_process('Deseja continuar lendo arquivos? (y/n): '):
             over = True
             continue
-        input_file = get_valid_file_name('Insira o novo arquivo .html a ser lido (com ou sem extensão): ', '.html')
-        use_same_file = input('Deseja salvar os dados no mesmo arquivo .txt de antes? (y/n): ')
-        if use_same_file == 'y':
+
+        info_file = get_valid_file_name('Insira o novo arquivo .html a ser lido (com ou sem extensão): ', '.html')
+
+        if continue_process('Deseja salvar os dados no mesmo arquivo .txt de antes? (y/n): '):
             continue
+
         save_file = get_valid_file_name('Insira o nome do novo arquivo .txt (com ou sem extensão): ', '.txt', False)
+    print(CONCLUSION_MESSAGE)
