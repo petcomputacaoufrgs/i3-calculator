@@ -25,4 +25,3 @@ Para utilizar o script, basta utilizar um ambiente onde o Python esteja configur
 
 ## Melhorias a serem feitas
 - Aceitar também Histórico Escolar
-- Melhoria na forma como os dados são salvos no arquivo -> gerar um csv seria bem mais útil *[em progresso]*
