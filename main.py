@@ -44,19 +44,33 @@ def get_valid_file_name(message: str, extension: str, need_to_exist=True) -> str
     return input_file
 
 
-def continue_process(question: str) -> bool:
-    """ Verify if the process should contnue or not based on the user answer
+def continue_process(question: str, default=None) -> bool:
+    """ Verify if the process should continue or not based on the user's choice
     :param question: string with the question made
-    :return: return the boolean indicating if the process continue or not
+    :param default: default option if no input is given ('y' or 'n') (forces user to enter a valid input if empty)
+    :return: return a boolean indicating if the process continues or not
     """
-    answer = input(question)
-    while answer != 'n' and answer != 'y':
-        answer = input('Resposta inválida. \nPor favor, tente novamente (y/n): ')
+    prompt = question
+    if default != None:
+        if default == 'y': prompt += ' (Y/n): '
+        else: prompt += ' (y/N): '
+    else: prompt += ' (y/n): '
 
-    if answer == 'n':
-        return False
-    else:
+    answer = input(prompt).lower()
+
+    if len(answer) == 0 and default != None:
+        if default == 'y':
+            return True
+        else:
+            return False
+
+    while answer != 'y' and answer != 'n':
+        answer = input('Escolha inválida. Por favor, tente novamente (y/n): ').lower()
+
+    if answer == 'y':
         return True
+    else:
+        return False
 
 
 def get_grades(info_table) -> (list[list[list[int]]], list[int]):
@@ -153,13 +167,13 @@ if __name__ == '__main__':
     while not over:
         save_student_i3(student, save_file)
 
-        if not continue_process('Deseja continuar lendo arquivos? (y/n): '):
+        if not continue_process('Deseja continuar lendo arquivos?', 'y'):
             over = True
             continue
 
         info_file = get_valid_file_name('Insira o novo arquivo .html a ser lido (com ou sem extensão): ', '.html')
 
-        if continue_process('Deseja salvar os dados no mesmo arquivo .txt de antes? (y/n): '):
+        if continue_process('Deseja salvar os dados no mesmo arquivo .txt de antes?', 'y'):
             continue
 
         save_file = get_valid_file_name('Insira o nome do novo arquivo .txt (com ou sem extensão): ', '.txt', False)
