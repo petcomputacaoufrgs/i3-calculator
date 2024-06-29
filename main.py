@@ -82,9 +82,9 @@ def get_grades(info_table) -> (list[list[list[int]]], list[int]):
     absolute_grades = [0, 0, 0, 0, 0]
     grades_dictionary = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'FF': 4}
 
-    for r in range(0, len(info_table), 11):
-        semester = info_table[r].string.strip()
-        grade = info_table[r + 5].string.strip()
+    for r in range(0, info_table.rows, info_table.cols):
+        semester = info_table[info_table.col_semester].string.strip()
+        grade = info_table[info_table.col_grade].string.strip()
 
         if grade != '-':
             absolute_grades[grades_dictionary.get(grade)] += 1
@@ -95,17 +95,17 @@ def get_grades(info_table) -> (list[list[list[int]]], list[int]):
                         found = True
                         table_of_grades[i][1][grades_dictionary.get(grade)] += 1
 
-            if not found or len(table_of_grades) < 1:
-                if grade == 'A':
-                    table_of_grades.append([semester, [1, 0, 0, 0, 0]])
-                elif grade == 'B':
-                    table_of_grades.append([semester, [0, 1, 0, 0, 0]])
-                elif grade == 'C':
-                    table_of_grades.append([semester, [0, 0, 1, 0, 0]])
-                elif grade == 'D':
-                    table_of_grades.append([semester, [0, 0, 0, 1, 0]])
-                elif grade == 'FF':
-                    table_of_grades.append([semester, [0, 0, 0, 0, 1]])
+        if not found or len(table_of_grades) < 1:
+            if grade == 'A':
+                table_of_grades.append([semester, [1, 0, 0, 0, 0]])
+            elif grade == 'B':
+                table_of_grades.append([semester, [0, 1, 0, 0, 0]])
+            elif grade == 'C':
+                table_of_grades.append([semester, [0, 0, 1, 0, 0]])
+            elif grade == 'D':
+                table_of_grades.append([semester, [0, 0, 0, 1, 0]])
+            elif grade == 'FF':
+                table_of_grades.append([semester, [0, 0, 0, 0, 1]])
     return table_of_grades, absolute_grades
 
 
@@ -132,6 +132,14 @@ def save_student_i3(student_info, destination_file: str):
     # file.write('\n')
     file.close()
 
+class Table:
+    def __init__(self, table):
+        self.table = table
+        self.cols = len(table.findAll('th'))
+        self.rows = len(table.findAll('tr'))
+        self.col_semester = len(table.find(string="Período Letivo").find_all_previous('th')) - 1
+        self.col_grade = len(table.find(string="Conceito").find_all_previous('th')) - 1
+
 
 class Student:
     def __init__(self, file_name):
@@ -140,7 +148,8 @@ class Student:
 
         self.name = soup.find("div", class_="nomePessoa").string.strip()
         print(self.name)
-        info_table = soup.find("table", class_="modelo1").findAll('td')
+        info_table = Table(soup.find("table", class_="modelo1"))
+        # info_table = soup.find("table", class_="modelo1").findAll('td')
         html.close()
 
         table_of_grades, absolute_grades = get_grades(info_table)
