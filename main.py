@@ -68,9 +68,9 @@ def get_grades(info_table) -> (list[list[list[int]]], list[int]):
     absolute_grades = [0, 0, 0, 0, 0]
     grades_dictionary = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'FF': 4}
 
-    for r in range(0, len(info_table), 9):
+    for r in range(0, len(info_table), 11):
         semester = info_table[r].string.strip()
-        grade = info_table[r + 2].string.strip()
+        grade = info_table[r + 5].string.strip()
 
         if grade != '-':
             absolute_grades[grades_dictionary.get(grade)] += 1
@@ -112,10 +112,10 @@ def save_student_i3(student_info, destination_file: str):
     :return: void
     """
     file = open(destination_file, "a")
-    file.write(f'Candidato: {student_info.name}, I3: {student_info.I3}')
+    file.write(f'Candidato: {student_info.name}, I3: {student_info.I3}\n')
     for semester in student_info.grades_per_semester:
-        file.write(f', I3 {semester[0]}: {semester[2]}')
-    file.write('\n')
+        file.write(f'I3 {semester[0]}: {semester[2]}\n')
+    # file.write('\n')
     file.close()
 
 
