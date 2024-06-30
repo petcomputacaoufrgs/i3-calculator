@@ -74,6 +74,7 @@ def continue_process(question: str, default=None) -> bool:
 
 
 def find_semester_column(table) -> int:
+    # possible header titles for the semester column
     semestre = ["Per�odo Letivo", "Período Letivo"]
     i = -1
     found = None
@@ -88,6 +89,7 @@ def find_semester_column(table) -> int:
 
 
 def find_grade_column(table) -> int:
+    # possible header titles for the grade column
     conceito = ["Conceito"]
     i = -1
     found = None

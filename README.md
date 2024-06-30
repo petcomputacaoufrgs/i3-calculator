@@ -1,6 +1,6 @@
 # Calculadora de I3
 #### Projeto: Atividade Internas
-#### Linguagem utilizada: Python (versão 3.9.2)
+#### Linguagem utilizada: Python (versão 3.12.4)
 ##### Autor: [Vic](https://github.com/vickyad)
 
 
