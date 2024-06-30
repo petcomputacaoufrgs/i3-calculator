@@ -91,7 +91,8 @@ def calculate_i3(grade_table) -> float:
 
             if grade != '-': denominator += 1
 
-    return numerator/denominator
+    if denominator != 0: return numerator/denominator
+    else: return 0
 
 
 def calculate_semester_i3(grade_list) -> float:
