@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 import os
 
-MEETING_MESSAGE = '\033[1;30;46m Bem-vinde a calculadora de I3 \033[m'
-CONCLUSION_MESSAGE = '\033[1;30;46m Obrigada por usar o programa! \033[m'
+GREETING_MESSAGE = '\033[1;30;46m Bem-vinde a calculadora de I3 \033[m'
+ENDING_MESSAGE = '\033[1;30;46m Obrigada por usar o programa! \033[m'
 
 
 def has_extension(raw_file_name: str) -> bool:
@@ -73,6 +73,56 @@ def continue_process(question: str, default=None) -> bool:
         return False
 
 
+def find_semester_column(table) -> int:
+    semestre = ["Per�odo Letivo", "Período Letivo", "Ano"]
+    i = -1
+    found = None
+    
+    while found == None and i < len(semestre):
+        i += 1
+        found = table.find(string=semestre[i])
+
+    col_semester = len(table.find(string=semestre[i]).find_all_previous('th')) - 1
+    
+    return col_semester
+
+
+def find_grade_column(table) -> int:
+    conceito = ["Conceito", "\xa0Con-\xa0"]
+    i = -1
+    found = None
+    
+    while found == None and i < len(conceito):
+        i += 1
+        found = table.find(string=conceito[i])
+
+    col_semester = len(table.find(string=conceito[i]).find_all_previous('th')) - 1
+    
+    return col_semester
+
+
+def get_grades_from_html_table(table):
+    col_semester = find_semester_column(table)
+    col_grade = find_grade_column(table)
+    grades = {}
+
+    all_rows = table.find('tr').find_next_siblings('tr')
+
+    new_semester = ""
+    for row in all_rows:
+        cells = row.find_all('td')
+        semester = cells[col_semester].string.strip()
+        grade = cells[col_grade].string.strip()
+
+        if new_semester != semester:
+            grades[semester] = [grade]
+            new_semester = semester
+        else:
+            grades[semester].append(grade)
+
+    return grades
+
+
 def calculate_i3(grade_table) -> float:
     """ Calculate the overall I3 based on the formula
     I3 = [10 * A_grades + 8 * B_grades + 6 * C_grades] / total_grades
@@ -129,30 +179,6 @@ def save_student_i3(student_info, destination_file: str):
     file.close()
 
 
-def get_grades_from_html_table(table):
-    cols = len(table.find_all('th'))
-    rows = len(table.find_all('tr'))
-    col_semester = len(table.find(string="Per�odo Letivo").find_all_previous('th')) - 1
-    col_grade = len(table.find(string="Conceito").find_all_previous('th')) - 1
-    grades = {}
-
-    all_rows = table.find('tr').find_next_siblings('tr')
-
-    new_semester = ""
-    for row in all_rows:
-        cells = row.find_all('td')
-        semester = cells[col_semester].string.strip()
-        grade = cells[col_grade].string.strip()
-
-        if new_semester != semester:
-            grades[semester] = [grade]
-            new_semester = semester
-        else:
-            grades[semester].append(grade)
-
-    return grades
-
-
 class Student:
     def __init__(self, file_name):
         html = open(file_name)
@@ -160,6 +186,7 @@ class Student:
 
         self.name = soup.find("div", class_="nomePessoa").string.strip()
         print(self.name)
+        
         grade_table = get_grades_from_html_table(soup.find("table", class_="modelo1"))
         html.close()
 
@@ -173,26 +200,23 @@ class Student:
 
 
 if __name__ == '__main__':
-    print(MEETING_MESSAGE)
+    print(GREETING_MESSAGE)
     over = False
-    info_file = get_valid_file_name(
-        'Insira o nome do arquivo .html do histórico do curso do aluno (com ou sem extensão): ', '.html')
-    student = Student(info_file)
-
-    save_file = get_valid_file_name(
-        'Insira o nome do arquivo .txt onde os dados obtidos serão salvos (com ou sem extensão): ', '.txt', False)
+    have_file = False
 
     while not over:
+        info_file = get_valid_file_name(
+            'Insira o nome do arquivo .html do histórico do curso do aluno (com ou sem extensão): ', '.html')
+        student = Student(info_file)
+
+        if not have_file or not continue_process('Deseja salvar os dados no mesmo arquivo .txt de antes?', 'y'):
+            save_file = get_valid_file_name(
+                'Insira o nome do arquivo .txt onde os dados obtidos serão salvos (com ou sem extensão): ', '.txt', False)
+            have_file = True
+
         save_student_i3(student, save_file)
 
         if not continue_process('Deseja continuar lendo arquivos?', 'y'):
             over = True
-            continue
 
-        info_file = get_valid_file_name('Insira o novo arquivo .html a ser lido (com ou sem extensão): ', '.html')
-
-        if continue_process('Deseja salvar os dados no mesmo arquivo .txt de antes?', 'y'):
-            continue
-
-        save_file = get_valid_file_name('Insira o nome do novo arquivo .txt (com ou sem extensão): ', '.txt', False)
-    print(CONCLUSION_MESSAGE)
+    print(ENDING_MESSAGE)
