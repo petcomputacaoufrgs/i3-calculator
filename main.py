@@ -74,7 +74,7 @@ def continue_process(question: str, default=None) -> bool:
 
 
 def find_semester_column(table) -> int:
-    semestre = ["Per�odo Letivo", "Período Letivo", "Ano"]
+    semestre = ["Per�odo Letivo", "Período Letivo"]
     i = -1
     found = None
     
@@ -88,7 +88,7 @@ def find_semester_column(table) -> int:
 
 
 def find_grade_column(table) -> int:
-    conceito = ["Conceito", "\xa0Con-\xa0"]
+    conceito = ["Conceito"]
     i = -1
     found = None
     
