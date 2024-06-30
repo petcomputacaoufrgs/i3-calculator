@@ -74,10 +74,10 @@ def continue_process(question: str, default=None) -> bool:
 
 
 def calculate_i3(grade_table) -> float:
-    """ Calculate the I3 based on the formula
+    """ Calculate the overall I3 based on the formula
     I3 = [10 * A_grades + 8 * B_grades + 6 * C_grades] / total_grades
     Total_grades count A, B, C, D and FF grades
-    :param grade_table: table of grades by semester
+    :param grade_table: table of all grades by semester
     :return: I3 value
     """
     numerator = 0
@@ -94,7 +94,13 @@ def calculate_i3(grade_table) -> float:
     return numerator/denominator
 
 
-def calculate_i3_by_semester(grade_list) -> float:
+def calculate_semester_i3(grade_list) -> float:
+    """ Calculate a semester's I3 based on the formula
+    I3 = [10 * A_grades + 8 * B_grades + 6 * C_grades] / total_grades
+    Total_grades count A, B, C, D and FF grades
+    :param grade_table: list of grades for a specific semester
+    :return: I3 value
+    """
     numerator = 0
     denominator = 0
 
@@ -122,27 +128,28 @@ def save_student_i3(student_info, destination_file: str):
     file.close()
 
 
-class Table:
-    def __init__(self, table):
-        cols = len(table.find_all('th'))
-        rows = len(table.find_all('tr'))
-        col_semester = len(table.find(string="Per�odo Letivo").find_all_previous('th')) - 1
-        col_grade = len(table.find(string="Conceito").find_all_previous('th')) - 1
-        self.grades = {}
+def get_grades_from_html_table(table):
+    cols = len(table.find_all('th'))
+    rows = len(table.find_all('tr'))
+    col_semester = len(table.find(string="Per�odo Letivo").find_all_previous('th')) - 1
+    col_grade = len(table.find(string="Conceito").find_all_previous('th')) - 1
+    grades = {}
 
-        all_rows = table.find('tr').find_next_siblings('tr')
+    all_rows = table.find('tr').find_next_siblings('tr')
 
-        new_semester = ""
-        for row in all_rows:
-            cells = row.find_all('td')
-            semester = cells[col_semester].string.strip()
-            grade = cells[col_grade].string.strip()
+    new_semester = ""
+    for row in all_rows:
+        cells = row.find_all('td')
+        semester = cells[col_semester].string.strip()
+        grade = cells[col_grade].string.strip()
 
-            if new_semester != semester:
-                self.grades[semester] = [grade]
-                new_semester = semester
-            else:
-                self.grades[semester].append(grade)
+        if new_semester != semester:
+            grades[semester] = [grade]
+            new_semester = semester
+        else:
+            grades[semester].append(grade)
+
+    return grades
 
 
 class Student:
@@ -152,16 +159,16 @@ class Student:
 
         self.name = soup.find("div", class_="nomePessoa").string.strip()
         print(self.name)
-        grade_table = Table(soup.find("table", class_="modelo1")).grades
+        grade_table = get_grades_from_html_table(soup.find("table", class_="modelo1"))
         html.close()
 
         self.I3 = calculate_i3(grade_table)
         self.I3_by_semester = {}
 
         for semester in grade_table:
-            i3 = calculate_i3_by_semester(grade_table[semester])
+            i3 = calculate_semester_i3(grade_table[semester])
             if i3 != 0:
-                self.I3_by_semester[semester] = calculate_i3_by_semester(grade_table[semester])
+                self.I3_by_semester[semester] = calculate_semester_i3(grade_table[semester])
 
 
 if __name__ == '__main__':
