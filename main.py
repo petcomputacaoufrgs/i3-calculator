@@ -73,50 +73,40 @@ def continue_process(question: str, default=None) -> bool:
         return False
 
 
-def get_grades(info_table) -> (list[list[list[int]]], list[int]):
-    """ Get student grades based on the table with all information
-    :param info_table: html table with all data of the classes
-    :return: a list with all grades per semester and a list with all grades
-    """
-    table_of_grades = []
-    absolute_grades = [0, 0, 0, 0, 0]
-    grades_dictionary = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'FF': 4}
-
-    for r in range(0, info_table.rows, info_table.cols):
-        semester = info_table[info_table.col_semester].string.strip()
-        grade = info_table[info_table.col_grade].string.strip()
-
-        if grade != '-':
-            absolute_grades[grades_dictionary.get(grade)] += 1
-            found = False
-            if len(table_of_grades) > 0:
-                for i in range(len(table_of_grades)):
-                    if semester in table_of_grades[i]:
-                        found = True
-                        table_of_grades[i][1][grades_dictionary.get(grade)] += 1
-
-        if not found or len(table_of_grades) < 1:
-            if grade == 'A':
-                table_of_grades.append([semester, [1, 0, 0, 0, 0]])
-            elif grade == 'B':
-                table_of_grades.append([semester, [0, 1, 0, 0, 0]])
-            elif grade == 'C':
-                table_of_grades.append([semester, [0, 0, 1, 0, 0]])
-            elif grade == 'D':
-                table_of_grades.append([semester, [0, 0, 0, 1, 0]])
-            elif grade == 'FF':
-                table_of_grades.append([semester, [0, 0, 0, 0, 1]])
-    return table_of_grades, absolute_grades
-
-
-def calculate_i3(absolute_grades: list) -> float:
+def calculate_i3(grade_table) -> float:
     """ Calculate the I3 based on the formula
-    I3 = [10 * A_grades + 8 * B_grades + 6 * C_grades]/ total_grades
+    I3 = [10 * A_grades + 8 * B_grades + 6 * C_grades] / total_grades
     Total_grades count A, B, C, D and FF grades
-    :param absolute_grades: list with all grades count
+    :param grade_table: table of grades by semester
     :return: I3 value
     """
-    return (10 * absolute_grades[0] + 8 * absolute_grades[1] + 6 * absolute_grades[2]) / sum(absolute_grades)
+    numerator = 0
+    denominator = 0
+
+    for semester in grade_table:
+        for grade in grade_table[semester]:
+            if grade == 'A': numerator += 10
+            elif grade == 'B': numerator += 8
+            elif grade == 'C': numerator += 6
+
+            if grade != '-': denominator += 1
+
+    return numerator/denominator
+
+
+def calculate_i3_by_semester(grade_list) -> float:
+    numerator = 0
+    denominator = 0
+
+    for grade in grade_list:
+        if grade == 'A': numerator += 10
+        elif grade == 'B': numerator += 8
+        elif grade == 'C': numerator += 6
+
+        if grade != '-': denominator += 1
+
+    if denominator != 0: return numerator/denominator
+    else: return 0
 
 
 def save_student_i3(student_info, destination_file: str):
@@ -127,18 +117,32 @@ def save_student_i3(student_info, destination_file: str):
     """
     file = open(destination_file, "a")
     file.write(f'Candidato: {student_info.name}, I3: {student_info.I3}\n')
-    for semester in student_info.grades_per_semester:
-        file.write(f'I3 {semester[0]}: {semester[2]}\n')
-    # file.write('\n')
+    for semester in student_info.I3_by_semester:
+        file.write(f'I3 {semester}: {student_info.I3_by_semester[semester]}\n')
     file.close()
+
 
 class Table:
     def __init__(self, table):
-        self.table = table
-        self.cols = len(table.findAll('th'))
-        self.rows = len(table.findAll('tr'))
-        self.col_semester = len(table.find(string="Período Letivo").find_all_previous('th')) - 1
-        self.col_grade = len(table.find(string="Conceito").find_all_previous('th')) - 1
+        cols = len(table.find_all('th'))
+        rows = len(table.find_all('tr'))
+        col_semester = len(table.find(string="Per�odo Letivo").find_all_previous('th')) - 1
+        col_grade = len(table.find(string="Conceito").find_all_previous('th')) - 1
+        self.grades = {}
+
+        all_rows = table.find('tr').find_next_siblings('tr')
+
+        new_semester = ""
+        for row in all_rows:
+            cells = row.find_all('td')
+            semester = cells[col_semester].string.strip()
+            grade = cells[col_grade].string.strip()
+
+            if new_semester != semester:
+                self.grades[semester] = [grade]
+                new_semester = semester
+            else:
+                self.grades[semester].append(grade)
 
 
 class Student:
@@ -148,19 +152,16 @@ class Student:
 
         self.name = soup.find("div", class_="nomePessoa").string.strip()
         print(self.name)
-        info_table = Table(soup.find("table", class_="modelo1"))
-        # info_table = soup.find("table", class_="modelo1").findAll('td')
+        grade_table = Table(soup.find("table", class_="modelo1")).grades
         html.close()
 
-        table_of_grades, absolute_grades = get_grades(info_table)
+        self.I3 = calculate_i3(grade_table)
+        self.I3_by_semester = {}
 
-        self.grades_per_semester = table_of_grades
-
-        for semester in table_of_grades:
-            i3 = calculate_i3(semester[1])
-            semester.append(i3)
-
-        self.I3 = calculate_i3(absolute_grades)
+        for semester in grade_table:
+            i3 = calculate_i3_by_semester(grade_table[semester])
+            if i3 != 0:
+                self.I3_by_semester[semester] = calculate_i3_by_semester(grade_table[semester])
 
 
 if __name__ == '__main__':
